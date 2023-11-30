@@ -1,23 +1,23 @@
 import React, {useState, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
-import {accountSignupEmail} from '../../actions/accountActions.js'
+import {accountSignupVerify} from '../../actions/accountActions.js'
 
 const SignupEmailPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   
-  const [email, setEmail] = useState('')
+  const [code, setCode] = useState('')
   const account = useSelector((state) => state.account);
 
   const submit = (e) => {
     e.preventDefault();
-    dispatch(accountSignupEmail(email));
+    dispatch(accountSignupVerify(account.email, code));
   }
 
   useEffect(() => {
-    if (account.email !== '' && account.errorMessage === '') {
-      navigate('/signup/verify')
+    if (account.token !== '' && account.errorMessage === '') {
+      navigate('/signup/basic')
     }
   }, [
     account,
@@ -28,8 +28,8 @@ const SignupEmailPage = () => {
     <>
       <form onSubmit={submit} >
         <input 
-          type="text" placeholder="Email"
-          value={email} onChange={(e) => {setEmail(e.target.value)}} />
+          type="text" placeholder="Code"
+          value={code} onChange={(e) => {setCode(e.target.value)}} />
 
         <input type="button" value="Send" onClick={submit} />
 
