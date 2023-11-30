@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
-import {accountSignupEmail} from '../../actions/accountActions.js'
+import {accountSignupEmail} from '../../actions/accountSignupActions.js.js'
 
 const SignupEmailPage = () => {
   const dispatch = useDispatch();

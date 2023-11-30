@@ -1,23 +1,23 @@
 import React, {useState, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
-import {accountSignupVerify} from '../../actions/accountSignupActions.js'
+import {accountLoginEmail} from '../../actions/accountLoginActions.js'
 
-const SignupVerifyPage = () => {
+const LoginEmailPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   
-  const [code, setCode] = useState('')
+  const [email, setEmail] = useState('')
   const account = useSelector((state) => state.account);
 
   const submit = (e) => {
     e.preventDefault();
-    dispatch(accountSignupVerify(account.email, code));
+    dispatch(accountLoginEmail(email));
   }
 
   useEffect(() => {
-    if (account.token !== '' && account.errorMessage === '') {
-      navigate('/signup/basic')
+    if (account.email !== '' && account.errorMessage === '') {
+      navigate('/login/verify')
     }
   }, [
     account,
@@ -28,8 +28,8 @@ const SignupVerifyPage = () => {
     <>
       <form onSubmit={submit} >
         <input 
-          type="text" placeholder="Code"
-          value={code} onChange={(e) => {setCode(e.target.value)}} />
+          type="text" placeholder="Email"
+          value={email} onChange={(e) => {setEmail(e.target.value)}} />
 
         <input type="button" value="Send" onClick={submit} />
 
@@ -39,4 +39,4 @@ const SignupVerifyPage = () => {
   )
 }
 
-export default SignupVerifyPage
+export default LoginEmailPage

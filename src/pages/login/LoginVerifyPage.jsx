@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
-import {accountSignupVerify} from '../../actions/accountSignupActions.js'
+import { accountLoginVerify } from '../../actions/accountLoginActions.js'
 
-const SignupVerifyPage = () => {
+const LoginVerifyPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   
@@ -12,12 +12,12 @@ const SignupVerifyPage = () => {
 
   const submit = (e) => {
     e.preventDefault();
-    dispatch(accountSignupVerify(account.email, code));
+    dispatch(accountLoginVerify(account.email, code));
   }
 
   useEffect(() => {
     if (account.token !== '' && account.errorMessage === '') {
-      navigate('/signup/basic')
+      navigate('/login/password')
     }
   }, [
     account,
@@ -39,4 +39,4 @@ const SignupVerifyPage = () => {
   )
 }
 
-export default SignupVerifyPage
+export default LoginVerifyPage

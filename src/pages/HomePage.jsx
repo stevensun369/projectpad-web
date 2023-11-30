@@ -1,16 +1,16 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux"
-import { useNavigate } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 
 
-const EditHomePage = () => {
+const HomePage = () => {
   const navigate = useNavigate();
 
   const account = useSelector((state) => state.account)
 
   useEffect(() => {
     if (account.ID === '') {
-      navigate('/signup/email')
+      navigate('/login/email')
     }
   }, [
     account, navigate
@@ -18,9 +18,10 @@ const EditHomePage = () => {
 
   return (
     <div>
-      <h1>edit</h1>
+      <h1>home</h1>
+      <NavLink to='/edit/profile'>profil</NavLink>
     </div>
   )
 }
 
-export default EditHomePage
+export default HomePage

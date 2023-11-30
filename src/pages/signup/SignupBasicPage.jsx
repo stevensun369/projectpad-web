@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
-import {accountSignupBasic} from '../../actions/accountActions.js'
+import {accountSignupBasic} from '../../actions/accountSignupActions.js'
 
 const SignupBasicPage = () => {
   const dispatch = useDispatch();
@@ -36,7 +36,7 @@ const SignupBasicPage = () => {
       account.firstName !== '' && 
       account.errorMessage === ''
     ) {
-      navigate('/signup/basic')
+      navigate('/edit')
     }
 
     if (
