@@ -19,7 +19,7 @@ const HomePage = () => {
   return (
     <div>
       <h1>home</h1>
-      <NavLink to='/edit/profile'>profil</NavLink>
+      <NavLink to='/profile'>profil</NavLink>
     </div>
   )
 }

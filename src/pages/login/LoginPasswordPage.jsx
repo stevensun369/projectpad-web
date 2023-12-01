@@ -27,7 +27,7 @@ const SignupBasicPage = () => {
       account.firstName !== '' && 
       account.errorMessage === ''
     ) {
-      navigate('/edit')
+      navigate('/')
     }    
   }, [
     account,

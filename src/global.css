@@ -1,0 +1,22 @@
+:root {
+  --background: #d9d9d9;
+  --foreground: white;
+  --text: black;
+  --accent: #1C9479;
+  --accent-disabled: #d3d3d3;
+
+  --link: rgb(0, 119, 255);
+
+  --red: #bb0000;
+
+  --left-column-width: 20%;
+  --left-column-image: 15vh;
+
+  --center-column-width: 50%;
+  --center-column-height: 20vh;
+
+  --right-column-width: 30%;
+  --right-column-height: 40vh;
+
+  --link-icon: 20px;
+}

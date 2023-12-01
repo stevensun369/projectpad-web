@@ -153,12 +153,12 @@ export const accountReducer = (state = {loading: false, errorMessage: ''}, actio
       account = {
         ID: action.payload.account.ID,
         email: state.email,
-        phone: '',
+        phone: action.payload.account.phone,
         firstName: action.payload.account.firstName,
         lastName: action.payload.account.lastName,
         slug: action.payload.account.slug,
-        links: [],
-        bio: '',
+        links: action.payload.links,
+        bio: action.payload.account.bio,
         token: action.payload.token,
       }
 
