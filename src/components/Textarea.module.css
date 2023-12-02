@@ -1,0 +1,33 @@
+.textarea {
+  float: left;
+  outline: none;
+  border: none;
+
+  border: 1px solid var(--disabled);
+  border-radius: 12px;
+  width: 90%;
+  height: 100px;
+
+  padding: 10px;
+  box-sizing: border-box;
+
+  color: black;
+  font-family: sans-serif;
+}
+
+.textareaChanged {
+  float: left;
+  outline: none;
+  border: none;
+
+  border: 1px solid var(--warning);
+  border-radius: 12px;
+  width: 90%;
+  height: 100px;
+
+  padding: 10px;
+  box-sizing: border-box;
+
+  color: black;
+  font-family: sans-serif;
+}

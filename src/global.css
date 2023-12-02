@@ -3,11 +3,13 @@
   --foreground: white;
   --text: black;
   --accent: #1C9479;
-  --accent-disabled: #d3d3d3;
+  --accent-filter: brightness(0) saturate(100%) invert(49%) sepia(18%) saturate(1519%) hue-rotate(116deg) brightness(92%) contrast(96%);
+  --disabled: #8dd6bf;
 
   --link: rgb(0, 119, 255);
 
-  --red: #bb0000;
+  --error: #bb0000;
+  --warning: #DAA520;
 
   --left-column-width: 20%;
   --left-column-image: 15vh;

@@ -1,0 +1,46 @@
+.button {
+  border: none;
+  outline: none;
+  background: var(--accent);
+  color: white;
+  border-radius: 12px;
+  padding: 10px 15px;
+
+  margin-top: 5px;
+}
+
+.buttonLoading {
+  border: none;
+  outline: none;
+  background: var(--accent);
+  color: white;
+  border-radius: 12px;
+
+  padding: 10px 15px;
+}
+
+.button:disabled, .buttonLoading:disabled {
+  background: var(--disabled);
+}
+
+.buttonLoadingImg {
+  width: 20px;
+  height: 16px;
+  float: left;
+}
+
+.buttonLoadingImg img {
+  width: 140%;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.buttonText {
+  width: 30px;
+  height: 16px;
+  float: left;
+  
+  padding-left: 2px;
+}

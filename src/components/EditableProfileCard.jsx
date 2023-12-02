@@ -1,8 +1,40 @@
-import styles from './EditableProfileCard.module.css'
+import { useEffect, useState } from 'react'
+import Input from './Input'
+import Textarea from './Textarea'
+import Button from './Button'
 
-const EditableProfileCard = ({
-  account,
-}) => {
+import styles from './EditableProfileCard.module.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { checkSlug, changeSlug, changeAccount } from '../actions/accountFieldActions'
+
+const EditableProfileCard = () => {
+  const dispatch = useDispatch();
+  const account = useSelector((state) => state.account)
+
+  const [firstName, setFirstName] = useState(account.firstName);
+  const [lastName, setLastName] = useState(account.lastName);
+  const [phone, setPhone] = useState(account.phone)
+  const [bio, setBio] = useState(account.bio)
+  const [slug, setSlug] = useState(account.slug)
+  
+  const [formChanged, setFormChanged] = useState(false)
+
+  useEffect(() => {
+    setFormChanged( 
+      firstName !== account.firstName ||
+      lastName !== account.lastName || 
+      phone !== account.phone ||
+      bio !== account.bio
+    );
+  }, [
+    formChanged,
+    firstName,
+    lastName,
+    phone,
+    bio,
+    account
+  ])
+
   return (
     <div className={styles.card}>
       <div className={styles.leftColumn}>
@@ -12,16 +44,30 @@ const EditableProfileCard = ({
           </div>
         </div>
         <div className={styles.leftColumnButtonContainer}>
-          <button className={styles.leftColumnButton} disabled={false}>
-            Save new
+          <button className={styles.leftColumnButton} disabled={true}>
+            Save image
           </button>
         </div>
       </div>
 
       <div className={styles.centerColumn}>
         <div className={styles.centerColumnLine}>
-          <input className={styles.input} value={account.firstName} type="text" placeholder="First name" />
-          <input className={styles.input} value={account.lastName} type="text" placeholder="Last name" />
+          <div style={{width: '40%', float: 'left', marginRight: '15px'}}>
+            <Input 
+              defaultValue={account.firstName}
+              value={firstName} 
+              setValue={setFirstName}
+              placeholder="First Name"
+            />
+          </div>
+          <div style={{width: '40%', float: 'left'}}>
+            <Input 
+              defaultValue={account.lastName}
+              value={lastName} 
+              setValue={setLastName}
+              placeholder="Last Name"
+            />
+          </div>
         </div>
 
         <div className={styles.centerColumnLine} style={{paddingLeft: '5px'}}>
@@ -29,39 +75,74 @@ const EditableProfileCard = ({
         </div>
 
         <div className={styles.centerColumnLine}>
-          <input className={styles.input} value={account.phone} type="text" placeholder="Phone" />
+          <Input 
+            defaultValue={account.phone}
+            value={phone} 
+            setValue={setPhone}
+            placeholder="Last Name"
+          />
         </div> 
 
         <div className={styles.centerColumnLine}>
-          <span style={{'font-family': 'sans-serif', 'font-weight': 600, paddingLeft: '5px'}}>
+          <span style={{fontFamily: 'sans-serif', fontWeight: 500, paddingLeft: '5px'}}>
             Bio: 
           </span>
         </div>
 
         <div className={styles.centerColumnLine}>
-          <textarea className={styles.centerColumnBio} value={account.bio}/>
+          <Textarea 
+            defaultValue={account.bio}
+            value={bio} 
+            setValue={setBio}
+            placeholder="Last Name"
+          />
         </div>
 
         <div className={styles.centerColumnLine}>
           <div className={styles.centerColumnLineSave}>
-            <button>Save</button>
+            <Button loading={account.loading && formChanged} disabled={!formChanged} onClick={() => {
+              dispatch(changeAccount(
+                account.token, 
+                firstName, 
+                lastName, 
+                phone, bio
+              ));
+            }} text="Save"/>
           </div>
         </div>
       </div>
 
       <div className={styles.rightColumn}>
         <div className={styles.rightColumnSlug}>
-          <div style={{'font-family': 'sans-serif', 'font-weight': 600, paddingLeft: '2px'}}>Link: </div>
+          <div style={{fontFamily: 'sans-serif', fontWeight: 500, paddingLeft: '2px'}}>Link: </div>
         
-          <div className={styles.rightColumnSlugLink}>projectpad.xyz/view/</div>
-          <input className={styles.input} type="text" value={account.slug} />
+          <div className={styles.rightColumnSlugLink}>projectpad.xyz/view/</div><br />
+          <div style={{float: 'left', width: '40%', marginRight: '22px'}}>
+            <Input 
+              defaultValue={account.slug}
+              value={slug} 
+              setValue={(slug) => {
+                dispatch(checkSlug(account.token, slug));
+                setSlug(slug);
+              }}
+              placeholder="Last Name"
+            />
+          </div>
         
-          <button className={styles.rightColumnSlugButton}>
-            Save
-          </button>
+          <div style={{float: 'left'}}>
+            <Button 
+              text="Save"
+              onClick={() => {
+                dispatch(changeSlug(account.token, slug));
+              }}
+              loading={account.loading && account.slug !== slug}
+              // loading={false}
+              disabled={account.slug === slug}
+            />
+          </div>
 
           <br />
-          <div className={styles.error}></div>
+          <div className={styles.error}>{slug !== '' ?? account.errorMessage}</div>
 
         </div> 
 
